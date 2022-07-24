@@ -1,50 +1,58 @@
 package ru.netology.manager;
 import ru.netology.domain.FilmItem;
+import ru.netology.repository.AfishaRepository;
 
 
 public class AfishaManager {
 
     private int countFilms;
-    private FilmItem[] films = new FilmItem[0];
+    private int defaultCountFilms = 10;
+    private AfishaRepository repo;
 
-    public AfishaManager() {
-        this.countFilms = 10;
-
-    }
-    public AfishaManager(int countFilms) {
+    public AfishaManager(AfishaRepository repo, int countFilms) {
+        this.repo = repo;
         this.countFilms = countFilms;
+    }
+    public void setCountFilms(int countFilms) {
+
+        this.countFilms = countFilms;
+    }
+
+    public AfishaManager(AfishaRepository repository) {
+
+        this.repo = repo;
     }
 
 
 
     public void addFilm(FilmItem film) {
-        FilmItem[] tmp = new FilmItem[films.length + 1];
-        for (int i = 0; i < films.length; i++) {
-            tmp[i] = films[i];
-        }
-        tmp[tmp.length - 1] = film;
-        films = tmp;
+
+        repo.save(film);
     }
 
-    public FilmItem[] findAll() {
-
-        return films;
-
+    public FilmItem[] showAll() {
+        return repo.findAll();
     }
-    public FilmItem[] findLast() {
-        int resultLenght;
-        if(films.length >= countFilms) {
-            resultLenght = countFilms;
+
+  public FilmItem[] getFindLast() {
+        FilmItem[] films = repo.findAll();
+        int lenght = films.length;
+        if(countFilms <= 0) {
+            if(defaultCountFilms < lenght)
+            lenght = defaultCountFilms;
         } else{
-            resultLenght = films.length;
+            if (countFilms < lenght){
+                lenght = countFilms;
+            }
         }
 
-        FilmItem[] result = new FilmItem[resultLenght];
+        FilmItem[] result = new FilmItem[lenght];
         for (int i = 0; i < result.length; i++) {
             result[i] = films[films.length - 1 - i];
 
         }
         return result;
     }
+
 }
 
