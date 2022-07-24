@@ -14,16 +14,19 @@ public class AfishaManager {
         this.countFilms = countFilms;
     }
     public void setCountFilms(int countFilms) {
+
         this.countFilms = countFilms;
     }
 
     public AfishaManager(AfishaRepository repository) {
+
         this.repo = repo;
     }
 
 
 
     public void addFilm(FilmItem film) {
+
         repo.save(film);
     }
 
