@@ -24,23 +24,21 @@ public class AfishaManagerTest {
 
 
     //  @BeforeEach
-    // public void setup () {
-    //   AfishaManager manager = new AfishaManager(10);
+    //  public void setup() {
     //   manager.addFilm(film1);
-    ///   manager.addFilm(film2);
+    //   manager.addFilm(film2);
     //  manager.addFilm(film3);
-    //manager.addFilm(film4);
-    // manager.addFilm(film5);
+    //  manager.addFilm(film4);
+    //  manager.addFilm(film5);
     //  manager.addFilm(film6);
-    // manager.addFilm(film7);
-    // manager.addFilm(film8);
-    //  manager.addFilm(film9);
-    //manager.addFilm(film10);
+    //  manager.addFilm(film7);
+    // //  manager.addFilm(film8);
+    //   manager.addFilm(film9);
+    //  manager.addFilm(film10);
     // }
 
     @Test
-    public void shouldAllItems() {
-        ///AfishaManager manager = new AfishaManager();
+    public void shouldAllFilms() {
         manager.addFilm(film1);
         manager.addFilm(film2);
         manager.addFilm(film3);
@@ -61,7 +59,6 @@ public class AfishaManagerTest {
 
     @Test
     public void shouldReversedAllItems() {
-        // AfishaManager manager = new AfishaManager();
         manager.addFilm(film1);
         manager.addFilm(film2);
         manager.addFilm(film3);
@@ -90,4 +87,96 @@ public class AfishaManagerTest {
         FilmItem[] actual = manager.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldFindIfLessThanLimit() {
+        manager.addFilm(film1);
+        manager.addFilm(film2);
+        manager.addFilm(film3);
+        manager.addFilm(film4);
+        manager.addFilm(film5);
+        manager.addFilm(film6);
+        manager.addFilm(film7);
+        manager.addFilm(film8);
+        manager.addFilm(film9);
+
+        FilmItem[] expected = {
+                film9,
+                film8,
+                film7,
+                film6,
+                film5,
+                film4,
+                film3,
+                film2,
+                film1
+        };
+        FilmItem[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldFindIfMoreThanLimit() {
+        manager.addFilm(film1);
+        manager.addFilm(film2);
+        manager.addFilm(film3);
+        manager.addFilm(film4);
+        manager.addFilm(film5);
+        manager.addFilm(film6);
+        manager.addFilm(film7);
+        manager.addFilm(film8);
+        manager.addFilm(film9);
+        manager.addFilm(film10);
+        manager.addFilm(film11);
+        manager.addFilm(film12);
+
+        FilmItem[] expected = {
+                film12,
+                film11,
+                film10,
+                film9,
+                film8,
+                film7,
+                film6,
+                film5,
+                film4,
+                film3,
+
+        };
+        FilmItem[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldFindIfEqualToLimit() {
+        manager.addFilm(film1);
+        manager.addFilm(film2);
+        manager.addFilm(film3);
+        manager.addFilm(film4);
+        manager.addFilm(film5);
+        manager.addFilm(film6);
+        manager.addFilm(film7);
+        manager.addFilm(film8);
+        manager.addFilm(film9);
+        manager.addFilm(film10);
+
+        FilmItem[] expected = {
+                film10,
+                film9,
+                film8,
+                film7,
+                film6,
+                film5,
+                film4,
+                film3,
+                film2,
+                film1
+        };
+        FilmItem[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
 }
